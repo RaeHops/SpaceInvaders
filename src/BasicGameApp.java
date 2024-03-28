@@ -149,4 +149,15 @@ public class BasicGameApp implements Runnable {
 
 		bufferStrategy.show();
 	}
+	private void render() {
+		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
+		g.clearRect(0, 0, WIDTH, HEIGHT);
+
+		//draw the image of the astronaut
+		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
+
+		g.dispose();
+
+		bufferStrategy.show();
+	}
 }
