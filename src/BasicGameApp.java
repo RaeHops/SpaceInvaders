@@ -40,10 +40,12 @@ public class BasicGameApp implements Runnable {
 	public BufferStrategy bufferStrategy;
 	public Image astroPic;
 
+	public Image alienPic;
+
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Astronaut astro;
-
+public SpaceInvaders []Aliens;
 
    // Main method definition
    // This is the code that runs first and automatically
@@ -58,6 +60,12 @@ public class BasicGameApp implements Runnable {
    // This section is the setup portion of the program
    // Initialize your variables and construct your program objects here.
 	public BasicGameApp() {
+
+		Aliens = new SpaceInvaders[10];
+		for(int z = 0; z < Aliens.length; z++){
+			Aliens[z] = new SpaceInvaders(z*100,50);
+//
+		}
       
       setUpGraphics();
        
@@ -65,6 +73,9 @@ public class BasicGameApp implements Runnable {
       //create (construct) the objects needed for the game and load up 
 		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
 		astro = new Astronaut(10,100);
+
+		alienPic = Toolkit.getDefaultToolkit().getImage("Alien.jpg"); //load the picture
+
 
 
 	}// BasicGameApp()
@@ -145,19 +156,12 @@ public class BasicGameApp implements Runnable {
       //draw the image of the astronaut
 		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
 
+		for(int a = 0; a < Aliens.length; a++){
+			g.drawImage(alienPic, Aliens[a].xpos, Aliens[a].ypos, Aliens[a].width, Aliens[a].height, null);
+		}
 		g.dispose();
 
 		bufferStrategy.show();
 	}
-	private void render() {
-		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
-		g.clearRect(0, 0, WIDTH, HEIGHT);
 
-		//draw the image of the astronaut
-		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
-
-		g.dispose();
-
-		bufferStrategy.show();
-	}
 }
