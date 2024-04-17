@@ -15,7 +15,8 @@ public class SpaceInvaders {
     public int width;
     public int height;
     public boolean isAlive;            //a boolean to denote if the hero is alive or dead.
-
+    public Rectangle rec;
+    public boolean isCrashing;
 
     // METHOD DEFINITION SECTION
 
@@ -33,6 +34,7 @@ public class SpaceInvaders {
         width = 60;
         height = 60;
         isAlive = true;
+        isCrashing = false;
 
     } // constructor
 
@@ -40,7 +42,7 @@ public class SpaceInvaders {
     public void move() {
         xpos = xpos + dx;
         ypos = ypos + dy;
-
+        rec = new Rectangle(xpos, ypos, width, height);
     }
 }
 

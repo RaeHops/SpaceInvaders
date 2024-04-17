@@ -3,7 +3,7 @@ import java.awt.*;
 /**
  * Created by chales on 11/6/2017.
  */
-public class Astronaut {
+public class Spaceship {
 
     //VARIABLE DECLARATION SECTION
     //Here's where you state which variables you are going to use.
@@ -17,6 +17,10 @@ public class Astronaut {
     public boolean isAlive;            //a boolean to denote if the hero is alive or dead.
     public Rectangle rec;
     public boolean isCrashing;
+    public boolean isNorth;
+    public boolean isSouth;
+    public boolean isEast;
+    public boolean isWest;
 
     // METHOD DEFINITION SECTION
 
@@ -26,7 +30,7 @@ public class Astronaut {
 
     //This is a SECOND constructor that takes 3 parameters.  This allows us to specify the hero's name and position when we build it.
     // if you put in a String, an int and an int the program will use this constructor instead of the one above.
-    public Astronaut(int pXpos, int pYpos) {
+    public Spaceship(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
         dx =1;
@@ -35,60 +39,18 @@ public class Astronaut {
         height = 60;
         isAlive = true;
         isCrashing = false;
- 
+
     } // constructor
 
     //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
     public void move() {
-
         xpos = xpos + dx;
         ypos = ypos + dy;
         rec = new Rectangle(xpos, ypos, width, height);
-
-    }
-    public void bounce(){
-        if(xpos < 0){ //bounce of east wall
-            dx = -dx;
-        }
-        if(xpos > 1000-width){ //bounce of west wall
-            dx = -dx;
-        }
-        if(ypos < 0){ //bounce of north wall
-            dy = -dy;
-        }
-        if(ypos > 700-height){ //bounce of north wall
-            dy = -dy;
-        }
-        xpos = xpos + dx;
-        ypos = ypos + dy;
-        rec = new Rectangle(xpos, ypos, width, height);
-    }
-    public void wrap(){
-        if(xpos < 0){
-            xpos = 1000-width;
-
-        }
-        if(xpos > 1000-width){
-            xpos = 0;
-
-        }
-        if(ypos < 0){
-            ypos = 700-height;
-
-        }
-        if(ypos > 700-height){
-            ypos = 0;
-
-        }
-        xpos = xpos + dx;
-        ypos = ypos + dy;
-        rec = new Rectangle(xpos, ypos, width, height);
-    }
-    public void Collision(){
-        dx = -dx;
-
     }
 }
+
+
 
 
 

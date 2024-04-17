@@ -13,6 +13,8 @@
 
 //Graphics Libraries
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
 import javax.swing.JFrame;
@@ -22,7 +24,7 @@ import javax.swing.JPanel;
 //*******************************************************************************
 // Class Definition Section
 
-public class BasicGameApp implements Runnable {
+public class BasicGameApp implements Runnable, KeyListener {
 
    //Variable Definition Section
    //Declare the variables used in the program 
@@ -41,10 +43,13 @@ public class BasicGameApp implements Runnable {
 	public Image astroPic;
 
 	public Image alienPic;
+	public Image shipPic;
+	public Spaceship ship;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Astronaut astro;
+
 public SpaceInvaders []Aliens;
 
    // Main method definition
@@ -66,6 +71,8 @@ public SpaceInvaders []Aliens;
 			Aliens[z] = new SpaceInvaders(z*100,50);
 //
 		}
+		ship = new Spaceship(450,500);
+
       
       setUpGraphics();
        
@@ -75,6 +82,8 @@ public SpaceInvaders []Aliens;
 		astro = new Astronaut(10,100);
 
 		alienPic = Toolkit.getDefaultToolkit().getImage("Alien.jpg"); //load the picture
+		shipPic = Toolkit.getDefaultToolkit().getImage("Ship.png"); //load the picture
+
 
 
 
@@ -130,6 +139,7 @@ public SpaceInvaders []Aliens;
       canvas = new Canvas();  
       canvas.setBounds(0, 0, WIDTH, HEIGHT);
       canvas.setIgnoreRepaint(true);
+	  canvas.addKeyListener(this);
    
       panel.add(canvas);  // adds the canvas to the panel.
    
@@ -155,6 +165,7 @@ public SpaceInvaders []Aliens;
 
       //draw the image of the astronaut
 		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
+		g.drawImage(shipPic, ship.xpos, ship.ypos, ship.width, ship.height, null);
 
 		for(int a = 0; a < Aliens.length; a++){
 			g.drawImage(alienPic, Aliens[a].xpos, Aliens[a].ypos, Aliens[a].width, Aliens[a].height, null);
@@ -162,6 +173,62 @@ public SpaceInvaders []Aliens;
 		g.dispose();
 
 		bufferStrategy.show();
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
+
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		System.out.println(e.getKeyCode());
+		if(e.getKeyCode() == 87){
+			System.out.println("Going Up");
+//			astro.dx = 0;
+//			astro.dy = -5;
+			ship.isNorth = true;
+		}
+		if(e.getKeyCode() == 65){
+			System.out.println("Going Left");
+//			astro.dx = -5;
+//			astro.dy = 0;
+			ship.isEast = true;
+		}
+		if(e.getKeyCode() == 83){
+			System.out.println("Going Down");
+//			astro.dx = 0;
+//			astro.dy = 5;
+			ship.isSouth = true;
+		}
+		if(e.getKeyCode() == 68){
+			System.out.println("Going Right");
+//			astro.dx = 5;
+//			astro.dy = 0;
+			ship.isWest = true;
+		}
+
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if(e.getKeyCode() == 87){
+			System.out.println("Going Up");
+			ship.isNorth = false;
+		}
+		if(e.getKeyCode() == 65){
+			System.out.println("Going left");
+			ship.isEast = false;
+		}
+		if(e.getKeyCode() == 83){
+			System.out.println("Going down");
+			ship.isSouth = false;
+		}
+		if(e.getKeyCode() == 68){
+			System.out.println("Going right");
+			ship.isWest = false;
+		}
+
 	}
 
 }
