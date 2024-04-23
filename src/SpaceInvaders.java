@@ -29,17 +29,35 @@ public class SpaceInvaders {
     public SpaceInvaders(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx =1;
-        dy =0;
+        dx = (int)(Math.random()*10);
+        dy = (int)(Math.random()*5);
         width = 60;
         height = 60;
         isAlive = true;
         isCrashing = false;
+        //((int)(Math.random())*940,(int)(Math.random()*700));
 
     } // constructor
 
     //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
     public void move() {
+        xpos = xpos + dx;
+        ypos = ypos + dy;
+        rec = new Rectangle(xpos, ypos, width, height);
+    }
+    public void bounce(){
+        if(xpos < 0){ //bounce of east wall
+            dx = -dx;
+        }
+        if(xpos > 1000-width){ //bounce of west wall
+            dx = -dx;
+        }
+        if(ypos < 0){ //bounce of north wall
+            dy = -dy;
+        }
+        if(ypos > 700-height){ //bounce of north wall
+            dy = -dy;
+        }
         xpos = xpos + dx;
         ypos = ypos + dy;
         rec = new Rectangle(xpos, ypos, width, height);

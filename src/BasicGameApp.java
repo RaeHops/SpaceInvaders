@@ -44,6 +44,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 
 	public Image alienPic;
 	public Image shipPic;
+	public Image bulletPic;
 	public Spaceship ship;
 
    //Declare the objects used in the program
@@ -51,6 +52,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 	private Astronaut astro;
 
 public SpaceInvaders []Aliens;
+public Bullet []Bullets;
 
    // Main method definition
    // This is the code that runs first and automatically
@@ -71,7 +73,22 @@ public SpaceInvaders []Aliens;
 			Aliens[z] = new SpaceInvaders(z*100,50);
 //
 		}
+
 		ship = new Spaceship(450,500);
+
+		Bullets = new Bullet[100];
+		for(int z = 0; z < Bullets.length; z++){
+			Bullets[z] = new Bullet(ship.xpos, ship.ypos);
+//
+		}
+
+
+		Bullets[0].isAlive = true;
+		if (Bullets[0].isAlive == true && Bullet.rec.intersects(ship.rec) = false){
+			for(int x = 0; x == x+1; x++) {
+				Bullets[x].isAlive = true;
+			}
+		}
 
       
       setUpGraphics();
@@ -83,6 +100,7 @@ public SpaceInvaders []Aliens;
 
 		alienPic = Toolkit.getDefaultToolkit().getImage("Alien.jpg"); //load the picture
 		shipPic = Toolkit.getDefaultToolkit().getImage("Ship.png"); //load the picture
+		bulletPic = Toolkit.getDefaultToolkit().getImage("Bullet.png");
 
 
 
@@ -114,6 +132,13 @@ public SpaceInvaders []Aliens;
       //calls the move( ) code in the objects
 		astro.move();
 		ship.WrapAndControl();
+		for(int x = 0; x < Aliens.length; x++) {
+			Aliens[x].bounce();
+		}
+		for(int x = 0; x < Bullets.length; x++) {
+			Bullets[x].move();
+		}
+
 
 	}
 	
@@ -170,6 +195,11 @@ public SpaceInvaders []Aliens;
 
 		for(int a = 0; a < Aliens.length; a++){
 			g.drawImage(alienPic, Aliens[a].xpos, Aliens[a].ypos, Aliens[a].width, Aliens[a].height, null);
+		}
+		for(int a = 0; a < Bullets.length; a++) {
+			if (Bullets[a].isAlive == true) {
+				g.drawImage(bulletPic, Bullets[a].xpos, Bullets[a].ypos, Bullets[a].width, Bullets[a].height, null);
+			}
 		}
 		g.dispose();
 

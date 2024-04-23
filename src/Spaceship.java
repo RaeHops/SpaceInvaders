@@ -39,6 +39,7 @@ public class Spaceship {
         height = 60;
         isAlive = true;
         isCrashing = false;
+        rec = new Rectangle(xpos, ypos, width, height);
         isNorth = false;
         isSouth = false;
         isEast = false;
