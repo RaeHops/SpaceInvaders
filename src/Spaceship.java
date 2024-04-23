@@ -39,6 +39,10 @@ public class Spaceship {
         height = 60;
         isAlive = true;
         isCrashing = false;
+        isNorth = false;
+        isSouth = false;
+        isEast = false;
+        isWest = false;
 
     } // constructor
 
@@ -47,6 +51,46 @@ public class Spaceship {
         xpos = xpos + dx;
         ypos = ypos + dy;
         rec = new Rectangle(xpos, ypos, width, height);
+
+    }
+    public void WrapAndControl(){
+        if(xpos < 0){
+            xpos = 1000-width;
+
+        }
+        if(xpos > 1000-width){
+            xpos = 0;
+
+        }
+        if(ypos < 0){
+            ypos = 700-height;
+
+        }
+        if(ypos > 700-height){
+            ypos = 0;
+
+        }
+        xpos = xpos + dx;
+        ypos = ypos + dy;
+        rec = new Rectangle(xpos, ypos, width, height);
+
+        if(isNorth == false && isSouth == false){
+            dy = 0;
+        } else if(isNorth){
+            dy = -5;
+        } else{
+            dy = 5;
+        }
+
+        if(isEast == false && isWest == false){
+            dx = 0;
+        } else if(isEast){
+            dx = -5;
+        } else{
+            dx = 5;
+        }
+
+
     }
 }
 

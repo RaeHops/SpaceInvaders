@@ -113,6 +113,7 @@ public SpaceInvaders []Aliens;
 	{
       //calls the move( ) code in the objects
 		astro.move();
+		ship.WrapAndControl();
 
 	}
 	
