@@ -18,11 +18,13 @@ public class Bullet {
     public Rectangle rec;
     public boolean isCrashing;
 
+    public Bullet[] Bullets = new Bullet[100];
+
     public Bullet(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx = 1;
-        dy = 0;
+        dx = 0;
+        dy = -10;
         width = 60;
         height = 60;
         isAlive = false;
@@ -30,7 +32,6 @@ public class Bullet {
         rec = new Rectangle(xpos, ypos, width, height);
     }
     public void move() {
-
         xpos = xpos + dx;
         ypos = ypos + dy;
         rec = new Rectangle(xpos, ypos, width, height);
@@ -38,6 +39,8 @@ public class Bullet {
     public void Collision(){
         isAlive = false;
         isCrashing = true;
+        rec = new Rectangle(xpos, ypos, width, height);
+
 
     }
 

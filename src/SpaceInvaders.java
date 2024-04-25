@@ -62,6 +62,12 @@ public class SpaceInvaders {
         ypos = ypos + dy;
         rec = new Rectangle(xpos, ypos, width, height);
     }
+    public void Collision(){
+        isAlive = false;
+        isCrashing = true;
+        rec = new Rectangle(xpos, ypos, width, height);
+
+    }
 }
 
 
